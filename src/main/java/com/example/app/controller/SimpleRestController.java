@@ -35,7 +35,8 @@ public class SimpleRestController {
 
 	    @GetMapping("/random")
 	    public Greeting getRandom() {
-	        return greetings.get(new Random().nextInt(greetings.size()));
+			System.out.println("Heard a call to random endpoint.");
+			return greetings.get(new Random().nextInt(greetings.size()));
 	    }
 
 	    @PostMapping
