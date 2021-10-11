@@ -7,6 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SimpleRestApp {
 
 	public static void main(String[] args) {
+		System.out.println("Starting the greeting application.");
 		SpringApplication.run(SimpleRestApp.class, args);
 	}
 

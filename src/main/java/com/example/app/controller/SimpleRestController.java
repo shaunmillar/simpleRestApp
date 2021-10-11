@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,9 @@ import com.example.app.model.Greeting;
 @RestController
 @RequestMapping("/greetings")
 public class SimpleRestController {
+	
+		@Value("${app.environment.name}")
+    	private String enviroName;
 
 		private List<Greeting> greetings;
 
@@ -30,6 +34,7 @@ public class SimpleRestController {
 
 	    @GetMapping("/{id}")
 	    public Greeting getGreetingById(@PathVariable("id") final int id) {
+			System.out.println("Heard a call to id endpoint.");
 	        return greetings.get(id - 1); // list index starts with 0 but we prefer to start on 1
 	    }
 
@@ -42,6 +47,12 @@ public class SimpleRestController {
 	    @PostMapping
 	    @ResponseStatus(HttpStatus.OK)
 	    public void createGreeting(@RequestBody Greeting greeting) {
+			System.out.println("Heard a call to create endpoint.");
 	        greetings.add(greeting);
+	    }
+	    
+	    @GetMapping("/env")
+	    public String getEnvironment() {
+			return enviroName;
 	    }
 	}
