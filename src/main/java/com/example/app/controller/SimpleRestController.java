@@ -20,7 +20,7 @@ import com.example.app.model.Greeting;
 @RequestMapping("/greetings")
 public class SimpleRestController {
 	
-		@Value("${app.environment.name}")
+		@Value("${app.environment.name:unknown}")
     	private String enviroName;
 
 		private List<Greeting> greetings;
