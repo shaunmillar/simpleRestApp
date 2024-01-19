@@ -1,6 +1,6 @@
 # Simple Rest App
 
-A simple Spring Boot application useful for experimenting with Open Shift
+A simple Spring Boot application useful for experimenting with Open Shift. Test
 
 ## Running
 ```
