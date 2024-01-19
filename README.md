@@ -9,7 +9,7 @@ mvn spring-boot:run
 ```
 
 ## Endpoints
-GET http://localhost:8080/greetings/{id}  
-GET http://localhost:8080/greetings/random  
-POST GET http://localhost:8080/greetings/  
+GET http://localhost:8090/greetings/{id}  
+GET http://localhost:8090/greetings/random  
+POST GET http://localhost:8090/greetings/  
 	greeting body  
