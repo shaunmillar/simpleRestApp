@@ -1,0 +1,57 @@
+name: Build and push image to ECR
+
+env:
+  OPENSHIFT_SERVER: ${{ secrets.OPENSHIFT_SERVER }}
+  OPENSHIFT_TOKEN: ${{ secrets.OPENSHIFT_TOKEN }}
+  OPENSHIFT_NAMESPACE: ""
+  APP_NAME: ""
+
+on:
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    name: Build and push image to ECR
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: ap-south-1
+    - name: Login to Amazon ECR
+      id: iac
+      uses: aws-actions/amazon-ecr-login@v1
+    - name: Build, tag, and push image to Amazon ECR
+      env:
+        ECR_REGISTRY: ${{ steps.iac.outputs.registry }}
+        ECR_REPOSITORY: <your-ecr-registry-url>/<your-docker-image-name>
+        IMAGE_TAG: latest
+      run: |
+        aws ecr get-login-password --region af-south-1 | docker login --username AWS --password-stdin <your-ecr-registry-url>
+        docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
+        docker push $ECR_REPOSITORY:$IMAGE_TAG
+    - name: Install oc
+      uses: redhat-actions/openshift-tools-installer@v1
+      with:
+        oc: 4
+    - name: Log in to OpenShift
+      uses: redhat-actions/oc-login@v1
+      with:
+        openshift_server_url: ${{ env.OPENSHIFT_SERVER }}
+        openshift_token: ${{ env.OPENSHIFT_TOKEN }}
+        insecure_skip_tls_verify: true
+        namespace: ${{ env.OPENSHIFT_NAMESPACE }}
+    - name: Get POD
+      run: |
+        oc get po -A | grep "<service-you are deploying>" | grep Running
+        oc rollout latest <service-you are deploying>  -n pharmarun-dev
+        sleep 10
+        oc get po -A | grep "<service-you are deploying>" | grep Running -w
+        sleep 60
+        oc get po -A | grep "<service-you are deploying>" | grep Running -w
+        sleep 20
