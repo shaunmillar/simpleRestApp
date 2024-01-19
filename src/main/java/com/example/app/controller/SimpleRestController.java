@@ -28,7 +28,7 @@ public class SimpleRestController {
 	    public SimpleRestController() {
 	        greetings = new ArrayList<>();
 	        greetings.add(new Greeting("Hello!"));
-	        greetings.add(new Greeting("Nice to see you"));
+	        greetings.add(new Greeting("Nice to see you today"));
 	        greetings.add(new Greeting("Good Day!"));
 	    }
 
