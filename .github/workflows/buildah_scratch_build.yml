@@ -36,7 +36,7 @@ jobs:
       - name: Checkout simpleRestApp project
         uses: actions/checkout@v3
         with:
-          repository: "simpleRestApp"
+          repository: "shaunmillar/simpleRestApp"
           path: ${{ env.PROJECT_DIR }}
 
       # Setup java.
