@@ -1,4 +1,4 @@
-name: Buildah Build Image
+name: Buildah Build Image Snippet
 on: [push]
 
 jobs:
