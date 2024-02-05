@@ -19,8 +19,8 @@ jobs:
       uses: redhat-actions/buildah-build@v2
       with:
         base-image: docker.io/fabric8/java-alpine-openjdk11-jre
-        image: '$IMAGE_NAME'
-        tags: '$IMAGE_TAG'
+        image: "$IMAGE_NAME"
+        tags: "$IMAGE_TAG"
         content: |
           target/simpleRestApp-0.0.1-SNAPSHOT.jar
         entrypoint: java -jar simpleRestApp-0.0.1-SNAPSHOT.jar
@@ -28,4 +28,4 @@ jobs:
 
       # Check if image is build
     - name: Check images created
-      run: buildah images | grep '$IMAGE_NAME'
+      run: buildah images | grep "$IMAGE_NAME"
