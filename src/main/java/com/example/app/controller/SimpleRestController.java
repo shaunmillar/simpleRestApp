@@ -30,6 +30,7 @@ public class SimpleRestController {
 	        greetings.add(new Greeting("Hello!"));
 	        greetings.add(new Greeting("Nice to see you today"));
 	        greetings.add(new Greeting("Good Day!"));
+		greetings.add(new Greeting("Hola!"));
 	    }
 
 	    @GetMapping("/{id}")
