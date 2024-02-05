@@ -21,3 +21,7 @@ jobs:
           target/simpleRestApp-0.0.1-SNAPSHOT.jar
         entrypoint: java -jar simpleRestApp-0.0.1-SNAPSHOT.jar
         port: 8080
+
+      # Check if image is build
+    - name: Check images created
+      run: buildah images | grep 'simple-restapp-image'
