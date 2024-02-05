@@ -30,9 +30,3 @@ jobs:
       # Check if image is build
     - name: Check images created
       run: buildah images | grep 'simple-restapp-image'
-
-    - name: Echo Outputs
-        run: |
-          echo "Image: ${{ steps.build_image.outputs.image }}"
-          echo "Tags: ${{ steps.build_image.outputs.tags }}"
-          echo "Tagged Image: ${{ steps.build_image.outputs.image-with-tag }}"  
