@@ -1,7 +1,6 @@
 name: Greeting on variable day
 
-on:
-  push
+on: [push]
 
 env:
   DAY_OF_WEEK: Monday
