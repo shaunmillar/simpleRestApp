@@ -1,7 +1,9 @@
+# Example Dockerfile to build the maven project and load to a container
+
 # Build stage
 FROM maven:3.9.6-amazoncorretto-17-debian AS build
-COPY ./src /home/app/src
-COPY ./pom.xml /home/app
+COPY src /home/app/src
+COPY pom.xml /home/app
 RUN mvn -f /home/app/pom.xml clean test package
 
 # Package stage
